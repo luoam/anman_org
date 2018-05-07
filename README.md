@@ -9,6 +9,6 @@
 所有保存在星云链上的点就可以绘制成一条线，这条线上的每一个点
 都标记了星云社区志愿者的名字。
 
-
+![line](https://raw.githubusercontent.com/luoam/anman_org_nebulas/master/img/line.png)
 
 
