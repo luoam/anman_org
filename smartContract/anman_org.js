@@ -1,13 +1,13 @@
 "use strict";
 
 var ClosedItem = function (text) {
-    if (text){
+    if (text) {
         var obj = JSON.parse(text);
-        this.key = obj.timestamp;
+        this.key = obj.key;
         this.value = obj.value;
         this.author = obj.author;
         this.flag = obj.flag;
-    } else{
+    } else {
         this.key = "";
         this.author = "";
         this.value = "";
@@ -16,24 +16,23 @@ var ClosedItem = function (text) {
 }
 
 ClosedItem.prototype = {
-    toString:function () {
+    toString: function () {
         return JSON.stringify(this);
     }
 }
 
 
-
 var AnmanContract = function () {
-   LocalContractStorage.defineMapProperty(this, "arrayMap");
-   LocalContractStorage.defineMapProperty(this, "dataMap",{
-       parse:function (text) {
-           return new ClosedItem(text);
-       },
-       stringify:function (o) {
-           return o.toString();
-       }
-   });
-   LocalContractStorage.defineProperty(this, "size");
+    LocalContractStorage.defineMapProperty(this, "arrayMap");
+    LocalContractStorage.defineMapProperty(this, "dataMap", {
+        parse: function (text) {
+            return new ClosedItem(text);
+        },
+        stringify: function (o) {
+            return o.toString();
+        }
+    });
+    LocalContractStorage.defineProperty(this, "size");
 };
 
 AnmanContract.prototype = {
@@ -43,17 +42,15 @@ AnmanContract.prototype = {
 
     set: function (key, value) {
         var index = this.size;
-        key = key.trim();
-        value = value.trim();
-        if (key === "" || value === ""){
+        if (key === "" || value === "") {
             throw new Error("empty key / value");
         }
-        if (value.length > 20 || key.length > 20){
+        if (value.length > 20 || key.length > 20) {
             throw new Error("key / value exceed limit length")
         }
         var from = Blockchain.transaction.from;
-        var closedItem = this.repo.get(key);
-        if (closedItem){
+        var closedItem = this.dataMap.get(key);
+        if (closedItem) {
             throw new Error("value has been occupied");
         }
         closedItem = new ClosedItem();
@@ -63,34 +60,34 @@ AnmanContract.prototype = {
         closedItem.flag = "1";
         this.arrayMap.set(index, key);
         this.dataMap.set(key, closedItem);
-        this.size +=1;
+        this.size += 1;
     },
 
     get: function (key) {
         return this.dataMap.get(key);
     },
 
-    len:function(){
-      return this.size;
+    len: function () {
+        return this.size;
     },
 
-    forEach: function(limit, offset){
+    forEach: function (limit, offset) {
         limit = parseInt(limit);
         offset = parseInt(offset);
-        if(offset>this.size){
-           throw new Error("offset is not valid");
+        let result = [];
+        if (offset > this.size) {
+            throw new Error("offset is not valid");
         }
-        var number = offset+limit;
-        if(number > this.size){
-          number = this.size;
+        var number = offset + limit;
+        if (number > this.size) {
+            number = this.size;
         }
-        var result  = "";
-        for(var i=offset;i<number;i++){
+        for (var i = offset; i < number; i++) {
             var key = this.arrayMap.get(i);
             var object = this.dataMap.get(key);
-            result += "index:"+i+" key:"+ key + " value:" +object+"_";
+            result.push(object);
         }
-        return result;
+        return JSON.stringify(result);
     }
 };
 

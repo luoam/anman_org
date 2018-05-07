@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+    <!-- Loading Bootstrap -->
+    <link href="http://anmanopen.qiniudn.com/static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
+    <!--[if lt IE 9]>
+    <script src="http://www.anman.org/static/html5shiv/html5shiv.min.js"></script>
+    <script src="http://www.anman.org/static/respond/respond.min.js"></script>
+    <![endif]-->
+    <style>
+
+        body {
+            position: relative;
+            font-size:medium !important;
+        }
+        a{
+            color: #000;
+        }
+        a:link {color:#000;}		/* 未被访问的链接 */
+        a:visited {color:#000;}	/* 已被访问的链接 */
+        a:hover {color:#333;}	/* 鼠标指针移动到链接上 */
+        a:active {color:#000;}
+        .space10  { margin-top: 10px  !important;}
+        header{
+            margin-top: 0px;
+        }
+        .list-inline{
+            display: block;
+            padding: 5px 12px 5px;
+        }
+        .free_download {
+            background: #ffd633;;
+            font-size: 15px;
+            color: #fff;
+            padding: 14px 25px 15px 25px;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 400;
+            transition: all 0.3s ease-in-out;
+            box-shadow: 0 -3px 0 0 rgba(10, 65, 107, 0.5) inset;
+            /*-webkit-transition-duration: 0.5s;
+            -webkit-transition-timing-function: linear;*/
+        }
+        .free_download:hover {
+            /*    box-shadow: 0 42px 0 0 rgba(10, 65, 107, 0.5) inset;*/
+            color: #fff;
+            background-color:#1278c7;
+        }
+        .radius-border{
+            border-radius:8px;
+            -webkit-border-radius:8px;
+            -moz-border-radius:8px;
+            border:1px solid #ccc;
+            padding:5px;
+            background:white
+        }
+        img{max-width:100%;}
+        .content-wrapper{
+            word-break: break-all;
+            word-wrap: break-word;
+        }
+    </style>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="http://anmanopen.qiniudn.com/static/jquery/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="http://anmanopen.qiniudn.com/static/bootstrap/js/bootstrap.min.js"></script><meta name="keywords" content="团圆系统,失踪儿童信息平台,公安部儿童失踪信息紧急发布平台">
+    <meta name="description" content="公安部儿童失踪信息紧急发布平台">
+    <meta name="author" content="失踪儿童信息平台">
+    <title>提交数据至星云链|失踪儿童信息平台|公安部儿童失踪信息紧急发布平台|安满</title>
+    <style type="text/css">
+
+        .wallet {
+            margin-top: 1rem;
+            display: none;
+        }
+
+        .send {
+            margin-top: 1rem;
+            display: none;
+        }
+
+        .err {
+            border-color: red;
+        }
+
+        .openfile {
+            text-decoration: none;
+            font-size: 20px;
+            font-weight: bold;
+            height: 50px;
+            line-height: 50px;
+            border: 1px solid red;
+            display: block;
+            text-align: center
+        }
+    </style>
+    <script src="http://anmanopen.qiniudn.com/static/bootstrap/js/bootbox.min.js"></script>
+    <script src="http://anmanopen.qiniudn.com/static/bootstrap/js/nebulas.js"></script>
+    <script src="http://anmanopen.qiniudn.com/static/bootstrap/js/echarts.common.min.js"></script>
+</head>
+<body>
+<style type="text/css">
+    .navbar-toggle .icon-bar{
+        background-color: #000;
+    }
+</style>
+<!-- Static navbar -->
+<nav class="navbar navbar-static-top" style="margin-bottom:1px;">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="http://www.anman.org/" title="公安部儿童失踪信息紧急发布平台"><b>失踪儿童信息平台</b></a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="http://www.anman.org/"><b>公安部儿童失踪信息紧急发布平台</b></a></li>
+                <li><a href="http://www.anman.org//index/map"><b>全国失踪儿童分布地图</b></a></li>
+            </ul>
+            <div class="nav navbar-right">
+                <form class="navbar-form navbar-left" action="http://www.anman.org/index/search/" onsubmit="return asearch()">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <input class="form-control" id="search" name="search" type="search" placeholder="">
+                            <span class="input-group-btn">
+            <button type="submit" class="btn btn-default">搜索</button>
+          </span>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div><!--/.nav-collapse -->
+    </div>
+</nav>
+<script>
+    function asearch()
+    {
+        var search = $("#search").val();
+        if(search.length>0){
+            location.href = "http://www.anman.org/index/search/" + search;
+        }
+        return false;
+    }
+</script><section id="banner" style="margin-top:1px;padding-bottom: 0px;background-color: #6f5499; color: #fff;">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12" style="text-align: center">
+                <h4>寻找，不放弃任何一丝希望</h4>
+                <h5 style="margin-bottom: 0px;">对接公安部儿童失踪信息紧急发布平台数据，搜集的拐卖犯罪线索将传递给全国各地一线打拐民警</h5>
+            </div>
+
+            <div class="col-sm-12" style="text-align: center">
+                <ul class="list-inline">
+                    <li class="space10">
+                        <a href="http://www.anman.org/index/juanzhu/" class="free_download">赞助</a>
+
+                    </li>
+                </ul>
+
+                <p class="space10">
+                    已找回<b style="font-size:50px;">2930</b>名儿童
+                    <br>
+                    <a style="color: #ffffff" href="http://www.anman.org/nebulas/commit">基于星云链</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+<section id="echarts" style="margin-top:10px;padding-bottom: 10px;">
+    <div class="container">
+        <div class="row">
+            <div id="ec" class="col-sm-12" style="min-height: 260px">
+
+            </div>
+        </div>
+    </div>
+</section>
+<section id="commitdiv" style="margin-top:10px;padding-bottom: 10px;">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12" style="text-align: center">
+                <p class="space10"><label>点击按钮：</label><input type="button" class="btn btn-success" onclick="committ()"
+                                                              value="上链"
+                                                              name="commit" id="commitbtn"><label>将统计数据提交到星云链永久保存</label>
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="commit" style="margin-top:10px;padding-bottom: 10px;">
+    <div id="unlock" class="container wallet">
+        <div id="unlockWallet" class="col-md-12">
+            <div class="form-group">
+                <label for="openfile">选择你的钱包文件：</label>
+                <a class="openfile" onclick="openFiledialog()">选择钱包文件...</a>
+                <input type="file" id="openfile" style="display:none;">
+            </div>
+            <div class="form-group" id="password_div" style="display:none;">
+                <label for="password">你的钱包加密了，好！请输入密码。</label>
+                <input type="password" class="form-control" id="password" placeholder="">
+            </div>
+            <button id="unlockbtn" type="submit"
+                    class="btn btn-lg btn-warning btn-block col-xs-12 col-sm-12 col-md-12 text-center"
+                    onclick="unlock()">解锁
+            </button>
+        </div>
+    </div><!-- unlock -->
+    <div id="send" class="container send">
+        <div id="sendNas" class="col-md-12">
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="fromaddress">来自地址</label>
+                        <input type="text" class="form-control" id="fromaddress" placeholder="" disabled>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="balance">余额</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="balance" placeholder="">
+                            <div class="input-group-addon">NAS</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="toaddress">目的地址</label>
+                        <input type="text" class="form-control" id="toaddress" placeholder="" disabled>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="amount">要发送的价值 / 金额</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="amount" placeholder="Amount">
+                            <div class="input-group-addon">NAS</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="gas_limit">Gas 限制</label>
+                        <input type="text" class="form-control" id="gas_limit" value="200000" placeholder="">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="gas_price">Gas 价格</label>
+                        <i>( 1 NAS = 1EWei = 10
+                            <sup>18</sup> Wei )</i>
+                        <input type="text" class="form-control" id="gas_price" value="1000000" placeholder="">
+                    </div>
+                </div>
+            </div>
+            <button id="generate" type="submit"
+                    class="btn btn-lg btn-warning btn-block col-xs-12 col-sm-12 col-md-12 text-center"
+                    onclick="commitNebulas()">提交
+            </button>
+            <div class="form-group" style="text-align: center;">
+                <label id="txhash"></label>
+            </div>
+
+        </div>
+    </div><!-- send -->
+</section>
+<div class="fade loading modal" data-backdrop=static>
+    <div class=modal-dialog>
+        <div class=modal-content>
+            <div class=modal-body>
+                <div class=progress>
+                    <div class="progress-bar progress-bar-striped progress-bar-animated" role=progressbar
+                         style="width: 100%"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    "use strict";
+    var nebulas = require("nebulas"),
+        Account = nebulas.Account,
+        Utils = nebulas.Utils,
+        neb = new nebulas.Neb(),
+        globalParams = {
+            account: null,
+            selectedFile: null,
+            name: null
+        };
+    //Testnet:
+    // var ContractAddress = "n1gnuiiNFUWfGZpxaQk6DAiqv6djnEJso2i";
+    // var chainId = "1001";
+    // var initAddress = "n1LRdxLWijiqci8zTF72o84y7npUBrizp8a";
+    // neb.setRequest(new nebulas.HttpRequest("https://testnet.nebulas.io"));
+
+    //Mainnet:
+    var ContractAddress ="n1hw5sSQk82kXMLi8ngvGqS45Dgz3cfxqag";
+    var chainId = "1";
+    var initAddress = "n1Lvduf7mV6NBXwi43ahP3RqRKrnp6jHa8D";
+    neb.setRequest(new nebulas.HttpRequest("https://mainnet.nebulas.io"));
+    var Amount = 0;
+    $("#toaddress").val(ContractAddress);
+    $("#amount").val(Amount);
+    var timer;
+    $(document).ready(function () {
+        var myChart = echarts.init(document.getElementById('ec'));
+        myChart.showLoading({text: "正在努力加载..."});
+        initCall(function (params) {
+            neb.api
+                .call({
+                    from: params.from,
+                    to: params.to,
+                    value: params.value,
+                    nonce: params.nonce,
+                    gasPrice: params.gasPrice,
+                    gasLimit: params.gasLimit,
+                    contract: params.contract
+                })
+                .then(function (resp) {
+                    let arr = JSON.parse(resp.result);
+                    let arra = JSON.parse(arr);
+                    let cData = [];
+                    for (var k in arra) {
+                        let cItem = [];
+                        let t;
+                        t = arra[k];
+                        cItem.push((new Date(t.key)).toJSON());
+                        cItem.push(t.value);
+                        cItem.push(t.author);
+                        if (t.author == initAddress) {
+                            cItem.push('罗安满');
+                        } else {
+                            cItem.push('匿名');
+                        }
+                        cItem.push(t.flag);
+                        cData.push(cItem);
+                    }
+                    //绘制折线图
+
+                    myChart.hideLoading();
+                    var option = {
+                        grid: {
+                            top: '40',
+                            bottom: '40'
+                        },
+                        tooltip: {
+                            trigger: 'axis',
+                            formatter: function (params) {
+                                params = params[0];
+                                console.log(params);
+                                return '统计时间:' + (new Date(new Date(params.value[0]).getTime())).Format("yyyy年MM月dd日 HH:mm:ss") + '<br>找回人数:' + params.value[1] + '<br>数据上传:' + params.value[2] + '<br>志愿者:' + params.value[3];
+                            },
+                            axisPointer: {
+                                animation: true
+                            }
+                        },
+                        xAxis: {
+                            id: "time",
+                            type: 'time',
+                            splitLine: {
+                                show: true
+                            },
+                            name: '时间'
+                        },
+                        yAxis: {
+                            id: "total",
+                            type: 'value',
+                            splitLine: {
+                                show: true
+                            },
+                            min: function (value) {
+                                return value.min - 2;
+                            },
+                            max: function (value) {
+                                return value.max + 2;
+                            },
+                            name: '人数',
+                            nameLocation: 'end'
+                        },
+                        dataZoom: [
+                            {
+                                show: false,
+                                realtime: true,
+                            },
+                            {
+                                type: 'inside',
+                                realtime: true,
+                            }
+                        ],
+                        series: [{
+                            id: "anman_org_nebulas",
+                            name: "找回儿童数量统计",
+                            type: 'line',
+                            showSymbol: true,
+                            symbolSize: 10,
+                            hoverAnimation: true,
+                            data: cData,
+                            clipOverflow: false
+                        }]
+                    };
+                    myChart.setOption(option);
+
+                    window.onresize = myChart.resize;
+
+                    if (resp.execute_err && resp.execute_err !== "") {
+                        console.log(resp.execute_err);
+                    } else {
+                    }
+                })
+                .catch(function (err) {
+                    console.log(JSON.stringify(err));
+                });
+        });
+
+    });
+    Date.prototype.Format = function (fmt) { //author: meizz
+        var o = {
+            "M+": this.getMonth() + 1, //月份
+            "d+": this.getDate(), //日
+            "H+": this.getHours(), //小时
+            "m+": this.getMinutes(), //分
+            "s+": this.getSeconds(), //秒
+            "q+": Math.floor((this.getMonth() + 3) / 3), //季度
+            "S": this.getMilliseconds() //毫秒
+        };
+        if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+        for (var k in o)
+            if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+        return fmt;
+    };
+    var committ = function () {
+        $("#unlock").show();
+        $("#send").show();
+    };
+    var openFiledialog = function () {
+        return $("#openfile").click();
+    }
+    $("#openfile").change(function () {
+        globalParams.selectedFile = $("#openfile")[0].files[0];
+        try {
+            globalParams.name = globalParams.selectedFile.name;
+            $(".openfile").text(globalParams.name);
+            $("#password_div").show();
+            console.log(name);
+        } catch (e) {
+            bootbox.dialog(
+                {
+                    title: 'Error',
+                    message: e, size: 'large'
+                }
+            );
+        }
+    });
+    var unlock = function () {
+        try {
+            if (globalParams.name == null) {
+                bootbox.dialog(
+                    {
+                        title: '提示',
+                        message: "请选择您的钱包文件",
+                        size: 'large',
+                        onEscape: true
+                    }
+                );
+            } else {
+                var password = $("#password").val();
+                var reader = new FileReader();
+                reader.readAsText(globalParams.selectedFile);
+                reader.onload = function () {
+                    try {
+                        var mFileJson = JSON.parse(this.result);
+                        var mAccount = Account.fromAddress(mFileJson.address);
+                        var balance_nas, state;
+                        var fromAddr = mAccount.getAddressString();
+                        $("#fromaddress").val(fromAddr);
+                        $(".modal.loading").modal("show");
+                        try {
+                            mAccount.fromKey(mFileJson, password, true);
+                            globalParams.account = mAccount;
+                            neb.api.gasPrice()
+                                .then(function (resp) {
+                                    console.log(resp);
+                                    $("#gas_price").val(resp.gas_price);
+                                    return neb.api.getAccountState(fromAddr);
+                                })
+                                .then(function (resp) {
+                                    console.log(resp);
+                                    var balance = nebulas.Unit.fromBasic(resp.balance, "nas");
+                                    $("#balance").val(balance);
+
+                                    $(".modal.loading").modal("hide");
+                                })
+                                .catch(function (e) {
+                                    // this catches e thrown by nebulas.js!neb
+
+                                    bootbox.dialog({
+                                        backdrop: true,
+                                        onEscape: true,
+                                        message: e + "星云API接口异常",
+                                        size: "large",
+                                        title: "Error"
+                                    });
+
+                                    $(".modal.loading").modal("hide");
+                                });
+
+                        } catch (e) {
+                            bootbox.dialog({
+                                backdrop: true,
+                                onEscape: true,
+                                message: "keystore 文件错误, 或者密码错误",
+                                size: "large",
+                                title: "Error"
+                            });
+
+                            $(".modal.loading").modal("hide");
+
+                        }
+
+                    } catch (e) {
+                        bootbox.dialog(
+                            {
+                                title: 'Error',
+                                message: e,
+                                size: 'large'
+                            }
+                        );
+                    }
+
+                }
+            }
+        } catch (e) {
+            alert(e);
+        }
+    };
+    var innerCall = function (callback) {
+        var params = {};
+        if (!globalParams.account) {
+            bootbox.dialog(
+                {
+                    title: 'Error',
+                    message: "没有获取到合规账户",
+                    size: 'large'
+                }
+            );
+            return
+        }
+        params.from = globalParams.account.getAddressString();
+
+        // prepare to
+        let toAddr = $("#toaddress").val().trim();
+        if (!Account.isValidAddress(toAddr)) {
+            $("#toaddress").addClass("err");
+            setTimeout(function () {
+                $("#toaddress").removeClass("err");
+            }, 5000);
+            return;
+        }
+        params.to = toAddr;
+
+        // prepare gasLimit
+        let gasLimit = Utils.toBigNumber(0);
+        try {
+            gasLimit = Utils.toBigNumber($("#gas_limit").val());
+        } catch (err) {
+            console.log(err);
+        }
+        if (gasLimit.cmp(Utils.toBigNumber(0)) <= 0) {
+            $("#gas_limit").addClass("err");
+            setTimeout(function () {
+                $("#gas_limit").removeClass("err");
+            }, 5000);
+            return;
+        }
+        params.gasLimit = gasLimit.toNumber();
+
+        // prepare gasPrice
+        let gasPrice = Utils.toBigNumber(0);
+        try {
+            gasPrice = Utils.toBigNumber($("#gas_price").val());
+        } catch (err) {
+            console.log(err);
+        }
+        if (gasPrice.cmp(Utils.toBigNumber(0)) <= 0) {
+            $("#gas_price").addClass("err");
+            setTimeout(function () {
+                $("#gas_price").removeClass("err");
+            }, 5000);
+            return;
+        }
+        params.gasPrice = gasPrice.toNumber();
+
+        // prepare value
+        let value = Utils.toBigNumber(0);
+        try {
+            value = nebulas.Unit.toBasic(Utils.toBigNumber($("#amount").val()), "nas");
+        } catch (err) {
+            console.log(err);
+        }
+        if (value.cmp(Utils.toBigNumber(0)) < 0) {
+            // TODO 添加提示value输入不对
+            bootbox.dialog(
+                {
+                    title: 'Error',
+                    message: "发送金额输入不正确",
+                    size: 'large'
+                }
+            );
+            console.log("invalid value");
+            return;
+        }
+        params.value = value;
+
+        // prepare contract
+
+        var timestamp = new Date().getTime();
+        var total = '2930';
+        $.get('http://www.anman.org/nebulas/check_total', function (res) {
+            total = res.total;
+            console.log(total);
+        });
+        var args = "[" + timestamp + "," + total + "]";
+        params.contract = {
+            "function": "set",
+            "args": args
+        };
+
+        // prepare nonce
+        // needs refresh data on every 'test' and 'commit' call, because data update may slow,
+        // you can get different result by hit 'test' multiple times
+        neb.api.getAccountState(params.from).then(function (resp) {
+            var balance = nebulas.Unit.fromBasic(resp.balance, "nas");
+            $("#balance").val(balance);
+            params.nonce = parseInt(resp.nonce) + 1;
+            callback(params);
+        }).catch(function (err) {
+            // console.log("prepare nonce error: " + err);
+            bootbox.dialog({
+                backdrop: true,
+                onEscape: true,
+                message: err.message,
+                size: "large",
+                title: "Error"
+            });
+        });
+    };
+    var initCall = function (callback) {
+        var params = {};
+
+        params.from = initAddress;
+        params.to = ContractAddress;
+        params.gasLimit = Utils.toBigNumber("200000").toNumber();
+        params.gasPrice = Utils.toBigNumber("1000000").toNumber();
+
+        // prepare value
+        let value = Utils.toBigNumber(0);
+        params.value = value;
+
+        // prepare contract
+
+        var args = "[1000,0]";
+        params.contract = {
+            "function": "forEach",
+            "args": args
+        };
+
+        // prepare nonce
+        // needs refresh data on every 'test' and 'commit' call, because data update may slow,
+        // you can get different result by hit 'test' multiple times
+        neb.api.getAccountState(params.from).then(function (resp) {
+            var balance = nebulas.Unit.fromBasic(resp.balance, "nas");
+            params.nonce = parseInt(resp.nonce) + 1;
+            callback(params);
+        }).catch(function (err) {
+            // console.log("prepare nonce error: " + err);
+            bootbox.dialog({
+                backdrop: true,
+                onEscape: true,
+                message: err.message,
+                size: "large",
+                title: "Error"
+            });
+        });
+    };
+    var commitNebulas = function () {
+
+        innerCall(function (params) {
+            $(".modal.loading").modal("show");
+            var gTx = new nebulas.Transaction(parseInt(chainId), globalParams.account, params.to, params.value, params.nonce, params.gasPrice, params.gasLimit, params.contract);
+            console.log(gTx);
+            gTx.signTransaction();
+            neb.api
+                .sendRawTransaction(gTx.toProtoString())
+                .then(function (resp) {
+                    console.log(JSON.stringify(resp));
+                    $(".modal.loading").modal("hide");
+                    let t = 15;
+                    timer = setInterval(function () {
+                        if (t == 0) {
+                            GetFromNebulas(resp.txhash);
+                            t = 15;
+                        }
+                        $("#txhash").text(t);
+                        --t;
+                    }, 1000);
+
+
+                })
+                .catch(function (err) {
+                    console.log(JSON.stringify(err));
+                    $(".modal.loading").modal("hide");
+                });
+
+
+        })
+    };
+    var GetFromNebulas = function (txhash) {
+        neb.api.getTransactionReceipt(txhash)
+            .then(doneGetTransactionReceipt)
+            .catch(function (o) {
+                $(".modal.loading").modal("hide");
+
+                bootbox.dialog({
+                    backdrop: true,
+                    message: o.message,
+                    onEscape: true,
+                    size: "large",
+                    title: "Error"
+                });
+            });
+
+    };
+    var doneGetTransactionReceipt = function (o) {
+        $(".modal.loading").modal("hide");
+        if (o.status == 1) {
+            clearInterval(timer);
+        }
+        $("#txhash").text(o.status == 1 ? "提交操作成功" : (o.status == 0 ? "提交数据失败" : "数据正在提交"));
+    };
+
+
+</script>
+<footer class="bg-fff ">
+    <div class="container-fluid" style="border-top: 1px solid #ddd">
+        <div class="row">
+            <div class="col-xs-12 text-center" >
+                <h4 class="footer-title">Copyright © 2017-2050 <a href="http://www.anman.org/">失踪儿童信息平台</a>. <a href="http://www.miibeian.gov.cn/">浙ICP备14037650号</a>
+                </h4>
+                <p><a href='#'>Go Top</a></p>
+            </div>
+        </div>
+    </div>
+
+</footer></body>
+</html>
