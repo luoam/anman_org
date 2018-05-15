@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -5,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
     <!-- Loading Bootstrap -->
-    <link href="http://anmanopen.qiniudn.com/static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="http://static.anman.org/static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
     <!--[if lt IE 9]>
     <script src="http://www.anman.org/static/html5shiv/html5shiv.min.js"></script>
@@ -66,41 +67,25 @@
     </style>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="http://anmanopen.qiniudn.com/static/jquery/jquery.min.js"></script>
+    <script src="http://static.anman.org/static/jquery/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="http://anmanopen.qiniudn.com/static/bootstrap/js/bootstrap.min.js"></script><meta name="keywords" content="团圆系统,失踪儿童信息平台,公安部儿童失踪信息紧急发布平台">
+    <script src="http://static.anman.org/static/bootstrap/js/bootstrap.min.js"></script><meta name="keywords" content="团圆系统,失踪儿童信息平台,公安部儿童失踪信息紧急发布平台">
     <meta name="description" content="公安部儿童失踪信息紧急发布平台">
     <meta name="author" content="失踪儿童信息平台">
     <title>提交数据至星云链|失踪儿童信息平台|公安部儿童失踪信息紧急发布平台|安满</title>
     <style type="text/css">
 
-        .wallet {
-            margin-top: 1rem;
-            display: none;
+        .noExtension {
+            margin: auto;
+            font-size: 23px;
         }
 
-        .send {
-            margin-top: 1rem;
-            display: none;
-        }
 
-        .err {
-            border-color: red;
-        }
-
-        .openfile {
-            text-decoration: none;
-            font-size: 20px;
-            font-weight: bold;
-            height: 50px;
-            line-height: 50px;
-            border: 1px solid red;
-            display: block;
-            text-align: center
-        }
     </style>
-    <script src="http://anmanopen.qiniudn.com/static/bootstrap/js/bootbox.min.js"></script>
-    <script src="http://anmanopen.qiniudn.com/static/bootstrap/js/nebulas.js"></script>
+
+    <script src="http://static.anman.org/static/bootstrap/js/bootbox.min.js"></script>
+    <script src="http://static.anman.org/static/bootstrap/js/nebulas.js"></script>
+    <script src="http://static.anman.org/static/bootstrap/js/nebPay.js"></script>
     <script src="http://anmanopen.qiniudn.com/static/bootstrap/js/echarts.common.min.js"></script>
 </head>
 <body>
@@ -125,6 +110,7 @@
             <ul class="nav navbar-nav">
                 <li><a href="http://www.anman.org/"><b>公安部儿童失踪信息紧急发布平台</b></a></li>
                 <li><a href="http://www.anman.org//index/map"><b>全国失踪儿童分布地图</b></a></li>
+                <li><a href="http://www.anman.org/nebulas"><b>基于星云链</b></a></li>
             </ul>
             <div class="nav navbar-right">
                 <form class="navbar-form navbar-left" action="http://www.anman.org/index/search/" onsubmit="return asearch()">
@@ -150,7 +136,16 @@
         }
         return false;
     }
-</script><section id="banner" style="margin-top:1px;padding-bottom: 0px;background-color: #6f5499; color: #fff;">
+</script><section id="noExtension" style="margin-top:1px;padding-bottom: 0px;background-color:red; color:#fff;display: none;">
+    <div class="container">
+        <div class="row">
+            <div class="noExtension col-md-12" id="noExtension">
+                注意: 请安装谷歌浏览器扩展<a target="_blank" href="https://github.com/ChengOrangeJu/WebExtensionWallet">WebExtensionWallet</a>
+            </div>
+        </div>
+    </div>
+</section>
+<section id="banner" style="margin-top:1px;padding-bottom: 0px;background-color: #6f5499; color: #fff;">
     <div class="container">
         <div class="row">
             <div class="col-sm-12" style="text-align: center">
@@ -167,9 +162,12 @@
                 </ul>
 
                 <p class="space10">
-                    已找回<b style="font-size:50px;">2930</b>名儿童
+                    已找回<b style="font-size:50px;">2968</b>名儿童
                     <br>
-                    <a style="color: #ffffff" href="http://www.anman.org/nebulas/commit">基于星云链</a>
+                    <a style="color: #ffffff" href="http://www.anman.org/nebulas">基于星云链</a>:
+                    <a style="color: #ffffff" href="http://www.anman.org/nebulas/commit">统计指标上链</a>
+                    <a style="color: #ffffff" href="http://www.anman.org/nebulas/upNebulasChain">失踪儿童上链</a>
+                    <a style="color: #ffffff" href="http://www.anman.org/nebulas/regvolunteer">登记为志愿者</a>
                 </p>
             </div>
         </div>
@@ -197,81 +195,6 @@
     </div>
 </section>
 
-<section id="commit" style="margin-top:10px;padding-bottom: 10px;">
-    <div id="unlock" class="container wallet">
-        <div id="unlockWallet" class="col-md-12">
-            <div class="form-group">
-                <label for="openfile">选择你的钱包文件：</label>
-                <a class="openfile" onclick="openFiledialog()">选择钱包文件...</a>
-                <input type="file" id="openfile" style="display:none;">
-            </div>
-            <div class="form-group" id="password_div" style="display:none;">
-                <label for="password">你的钱包加密了，好！请输入密码。</label>
-                <input type="password" class="form-control" id="password" placeholder="">
-            </div>
-            <button id="unlockbtn" type="submit"
-                    class="btn btn-lg btn-warning btn-block col-xs-12 col-sm-12 col-md-12 text-center"
-                    onclick="unlock()">解锁
-            </button>
-        </div>
-    </div><!-- unlock -->
-    <div id="send" class="container send">
-        <div id="sendNas" class="col-md-12">
-            <div class="form-group">
-                <div class="row">
-                    <div class="col-md-6">
-                        <label for="fromaddress">来自地址</label>
-                        <input type="text" class="form-control" id="fromaddress" placeholder="" disabled>
-                    </div>
-                    <div class="col-md-6">
-                        <label for="balance">余额</label>
-                        <div class="input-group">
-                            <input type="text" class="form-control" id="balance" placeholder="">
-                            <div class="input-group-addon">NAS</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="row">
-                    <div class="col-md-6">
-                        <label for="toaddress">目的地址</label>
-                        <input type="text" class="form-control" id="toaddress" placeholder="" disabled>
-                    </div>
-                    <div class="col-md-6">
-                        <label for="amount">要发送的价值 / 金额</label>
-                        <div class="input-group">
-                            <input type="text" class="form-control" id="amount" placeholder="Amount">
-                            <div class="input-group-addon">NAS</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="row">
-                    <div class="col-md-6">
-                        <label for="gas_limit">Gas 限制</label>
-                        <input type="text" class="form-control" id="gas_limit" value="200000" placeholder="">
-                    </div>
-                    <div class="col-md-6">
-                        <label for="gas_price">Gas 价格</label>
-                        <i>( 1 NAS = 1EWei = 10
-                            <sup>18</sup> Wei )</i>
-                        <input type="text" class="form-control" id="gas_price" value="1000000" placeholder="">
-                    </div>
-                </div>
-            </div>
-            <button id="generate" type="submit"
-                    class="btn btn-lg btn-warning btn-block col-xs-12 col-sm-12 col-md-12 text-center"
-                    onclick="commitNebulas()">提交
-            </button>
-            <div class="form-group" style="text-align: center;">
-                <label id="txhash"></label>
-            </div>
-
-        </div>
-    </div><!-- send -->
-</section>
 <div class="fade loading modal" data-backdrop=static>
     <div class=modal-dialog>
         <div class=modal-content>
@@ -287,14 +210,9 @@
 <script>
     "use strict";
     var nebulas = require("nebulas"),
-        Account = nebulas.Account,
         Utils = nebulas.Utils,
-        neb = new nebulas.Neb(),
-        globalParams = {
-            account: null,
-            selectedFile: null,
-            name: null
-        };
+        neb = new nebulas.Neb();
+
     //Testnet:
     // var ContractAddress = "n1gnuiiNFUWfGZpxaQk6DAiqv6djnEJso2i";
     // var chainId = "1001";
@@ -306,10 +224,15 @@
     var chainId = "1";
     var initAddress = "n1Lvduf7mV6NBXwi43ahP3RqRKrnp6jHa8D";
     neb.setRequest(new nebulas.HttpRequest("https://mainnet.nebulas.io"));
+
+    var NebPay = require("nebpay");     //https://github.com/nebulasio/nebPay
+    var nebPay = new NebPay();
     var Amount = 0;
     $("#toaddress").val(ContractAddress);
     $("#amount").val(Amount);
-    var timer;
+    if (typeof(webExtensionWallet) === "undefined") {
+        $("#noExtension").show();
+    }
     $(document).ready(function () {
         var myChart = echarts.init(document.getElementById('ec'));
         myChart.showLoading({text: "正在努力加载..."});
@@ -421,237 +344,6 @@
         });
 
     });
-    Date.prototype.Format = function (fmt) { //author: meizz
-        var o = {
-            "M+": this.getMonth() + 1, //月份
-            "d+": this.getDate(), //日
-            "H+": this.getHours(), //小时
-            "m+": this.getMinutes(), //分
-            "s+": this.getSeconds(), //秒
-            "q+": Math.floor((this.getMonth() + 3) / 3), //季度
-            "S": this.getMilliseconds() //毫秒
-        };
-        if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
-        for (var k in o)
-            if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
-        return fmt;
-    };
-    var committ = function () {
-        $("#unlock").show();
-        $("#send").show();
-    };
-    var openFiledialog = function () {
-        return $("#openfile").click();
-    }
-    $("#openfile").change(function () {
-        globalParams.selectedFile = $("#openfile")[0].files[0];
-        try {
-            globalParams.name = globalParams.selectedFile.name;
-            $(".openfile").text(globalParams.name);
-            $("#password_div").show();
-            console.log(name);
-        } catch (e) {
-            bootbox.dialog(
-                {
-                    title: 'Error',
-                    message: e, size: 'large'
-                }
-            );
-        }
-    });
-    var unlock = function () {
-        try {
-            if (globalParams.name == null) {
-                bootbox.dialog(
-                    {
-                        title: '提示',
-                        message: "请选择您的钱包文件",
-                        size: 'large',
-                        onEscape: true
-                    }
-                );
-            } else {
-                var password = $("#password").val();
-                var reader = new FileReader();
-                reader.readAsText(globalParams.selectedFile);
-                reader.onload = function () {
-                    try {
-                        var mFileJson = JSON.parse(this.result);
-                        var mAccount = Account.fromAddress(mFileJson.address);
-                        var balance_nas, state;
-                        var fromAddr = mAccount.getAddressString();
-                        $("#fromaddress").val(fromAddr);
-                        $(".modal.loading").modal("show");
-                        try {
-                            mAccount.fromKey(mFileJson, password, true);
-                            globalParams.account = mAccount;
-                            neb.api.gasPrice()
-                                .then(function (resp) {
-                                    console.log(resp);
-                                    $("#gas_price").val(resp.gas_price);
-                                    return neb.api.getAccountState(fromAddr);
-                                })
-                                .then(function (resp) {
-                                    console.log(resp);
-                                    var balance = nebulas.Unit.fromBasic(resp.balance, "nas");
-                                    $("#balance").val(balance);
-
-                                    $(".modal.loading").modal("hide");
-                                })
-                                .catch(function (e) {
-                                    // this catches e thrown by nebulas.js!neb
-
-                                    bootbox.dialog({
-                                        backdrop: true,
-                                        onEscape: true,
-                                        message: e + "星云API接口异常",
-                                        size: "large",
-                                        title: "Error"
-                                    });
-
-                                    $(".modal.loading").modal("hide");
-                                });
-
-                        } catch (e) {
-                            bootbox.dialog({
-                                backdrop: true,
-                                onEscape: true,
-                                message: "keystore 文件错误, 或者密码错误",
-                                size: "large",
-                                title: "Error"
-                            });
-
-                            $(".modal.loading").modal("hide");
-
-                        }
-
-                    } catch (e) {
-                        bootbox.dialog(
-                            {
-                                title: 'Error',
-                                message: e,
-                                size: 'large'
-                            }
-                        );
-                    }
-
-                }
-            }
-        } catch (e) {
-            alert(e);
-        }
-    };
-    var innerCall = function (callback) {
-        var params = {};
-        if (!globalParams.account) {
-            bootbox.dialog(
-                {
-                    title: 'Error',
-                    message: "没有获取到合规账户",
-                    size: 'large'
-                }
-            );
-            return
-        }
-        params.from = globalParams.account.getAddressString();
-
-        // prepare to
-        let toAddr = $("#toaddress").val().trim();
-        if (!Account.isValidAddress(toAddr)) {
-            $("#toaddress").addClass("err");
-            setTimeout(function () {
-                $("#toaddress").removeClass("err");
-            }, 5000);
-            return;
-        }
-        params.to = toAddr;
-
-        // prepare gasLimit
-        let gasLimit = Utils.toBigNumber(0);
-        try {
-            gasLimit = Utils.toBigNumber($("#gas_limit").val());
-        } catch (err) {
-            console.log(err);
-        }
-        if (gasLimit.cmp(Utils.toBigNumber(0)) <= 0) {
-            $("#gas_limit").addClass("err");
-            setTimeout(function () {
-                $("#gas_limit").removeClass("err");
-            }, 5000);
-            return;
-        }
-        params.gasLimit = gasLimit.toNumber();
-
-        // prepare gasPrice
-        let gasPrice = Utils.toBigNumber(0);
-        try {
-            gasPrice = Utils.toBigNumber($("#gas_price").val());
-        } catch (err) {
-            console.log(err);
-        }
-        if (gasPrice.cmp(Utils.toBigNumber(0)) <= 0) {
-            $("#gas_price").addClass("err");
-            setTimeout(function () {
-                $("#gas_price").removeClass("err");
-            }, 5000);
-            return;
-        }
-        params.gasPrice = gasPrice.toNumber();
-
-        // prepare value
-        let value = Utils.toBigNumber(0);
-        try {
-            value = nebulas.Unit.toBasic(Utils.toBigNumber($("#amount").val()), "nas");
-        } catch (err) {
-            console.log(err);
-        }
-        if (value.cmp(Utils.toBigNumber(0)) < 0) {
-            // TODO 添加提示value输入不对
-            bootbox.dialog(
-                {
-                    title: 'Error',
-                    message: "发送金额输入不正确",
-                    size: 'large'
-                }
-            );
-            console.log("invalid value");
-            return;
-        }
-        params.value = value;
-
-        // prepare contract
-
-        var timestamp = new Date().getTime();
-        var total = '2930';
-        $.get('http://www.anman.org/nebulas/check_total', function (res) {
-            total = res.total;
-            console.log(total);
-        });
-        var args = "[" + timestamp + "," + total + "]";
-        params.contract = {
-            "function": "set",
-            "args": args
-        };
-
-        // prepare nonce
-        // needs refresh data on every 'test' and 'commit' call, because data update may slow,
-        // you can get different result by hit 'test' multiple times
-        neb.api.getAccountState(params.from).then(function (resp) {
-            var balance = nebulas.Unit.fromBasic(resp.balance, "nas");
-            $("#balance").val(balance);
-            params.nonce = parseInt(resp.nonce) + 1;
-            callback(params);
-        }).catch(function (err) {
-            // console.log("prepare nonce error: " + err);
-            bootbox.dialog({
-                backdrop: true,
-                onEscape: true,
-                message: err.message,
-                size: "large",
-                title: "Error"
-            });
-        });
-    };
     var initCall = function (callback) {
         var params = {};
 
@@ -690,62 +382,84 @@
             });
         });
     };
-    var commitNebulas = function () {
-
-        innerCall(function (params) {
-            $(".modal.loading").modal("show");
-            var gTx = new nebulas.Transaction(parseInt(chainId), globalParams.account, params.to, params.value, params.nonce, params.gasPrice, params.gasLimit, params.contract);
-            console.log(gTx);
-            gTx.signTransaction();
-            neb.api
-                .sendRawTransaction(gTx.toProtoString())
-                .then(function (resp) {
-                    console.log(JSON.stringify(resp));
-                    $(".modal.loading").modal("hide");
-                    let t = 15;
-                    timer = setInterval(function () {
-                        if (t == 0) {
-                            GetFromNebulas(resp.txhash);
-                            t = 15;
-                        }
-                        $("#txhash").text(t);
-                        --t;
-                    }, 1000);
-
-
-                })
-                .catch(function (err) {
-                    console.log(JSON.stringify(err));
-                    $(".modal.loading").modal("hide");
-                });
-
-
-        })
+    Date.prototype.Format = function (fmt) { //author: meizz 
+        var o = {
+            "M+": this.getMonth() + 1, //月份 
+            "d+": this.getDate(), //日 
+            "H+": this.getHours(), //小时 
+            "m+": this.getMinutes(), //分 
+            "s+": this.getSeconds(), //秒 
+            "q+": Math.floor((this.getMonth() + 3) / 3), //季度 
+            "S": this.getMilliseconds() //毫秒 
+        };
+        if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+        for (var k in o)
+            if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+        return fmt;
     };
-    var GetFromNebulas = function (txhash) {
-        neb.api.getTransactionReceipt(txhash)
-            .then(doneGetTransactionReceipt)
-            .catch(function (o) {
-                $(".modal.loading").modal("hide");
+    var serialNumber;
+    var intervalQuery;
+    var count=0;
+    var committ = function () {
+        $(".modal.loading").modal("show");
+        let result = [];
+        let timestamp = new Date().getTime();
+        let total = '2968';
+        $.get('http://www.anman.org/nebulas/check_total', function (res) {
+            total = res.total;
+            console.log(total);
+        });
+        var args = "[" + timestamp + "," + total + "]";
+        result.push(timestamp);
+        result.push(total);
+        let callArgs = JSON.stringify(result);
+        let callFunction = "set";
+        serialNumber = nebPay.call(ContractAddress, Amount, callFunction, callArgs, {    //使用nebpay的call接口去调用合约,
 
+            listener: cbPush        //设置listener, 处理交易返回信息
+        });
+        intervalQuery=setInterval(function () {
+            funcIntervalQuery();
+        }, 5000);
+    };
+    var cbPush = function (resp) {
+        console.log("response of push: " + JSON.stringify(resp))
+    };
+    var funcIntervalQuery = function () {
+        count+=1;
+        nebPay.queryPayInfo(serialNumber)   //search transaction result from server (result upload to server by app)
+            .then(function (resp) {
+                console.log("tx result: " + resp)   //resp is a JSON string
+                var respObject = JSON.parse(resp)
+                if (respObject.code === 0) {
+                    $(".modal.loading").modal("hide");
+                    clearInterval(intervalQuery)
+                }else{
+                    if (count==7){
+                        bootbox.dialog({
+                            backdrop: true,
+                            message: respObject.msg,
+                            onEscape: true,
+                            size: "large",
+                            title: "Error"
+                        });
+                        clearInterval(intervalQuery)
+                        $(".modal.loading").modal("hide");
+                    }
+
+                }
+
+            })
+            .catch(function (err) {
                 bootbox.dialog({
                     backdrop: true,
-                    message: o.message,
+                    message: err.message,
                     onEscape: true,
                     size: "large",
                     title: "Error"
                 });
             });
-
     };
-    var doneGetTransactionReceipt = function (o) {
-        $(".modal.loading").modal("hide");
-        if (o.status == 1) {
-            clearInterval(timer);
-        }
-        $("#txhash").text(o.status == 1 ? "提交操作成功" : (o.status == 0 ? "提交数据失败" : "数据正在提交"));
-    };
-
 
 </script>
 <footer class="bg-fff ">
