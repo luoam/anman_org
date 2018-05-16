@@ -136,7 +136,7 @@
         }
         return false;
     }
-</script><section id="noExtension" style="margin-top:1px;padding-bottom: 0px;background-color:red; color:#fff;display: none;">
+</script><section id="noExtensions" style="margin-top:1px;padding-bottom: 0px;background-color:red; color:#fff;display: none;">
     <div class="container">
         <div class="row">
             <div class="noExtension col-md-12" id="noExtension">
@@ -162,7 +162,7 @@
                 </ul>
 
                 <p class="space10">
-                    已找回<b style="font-size:50px;">2968</b>名儿童
+                    已找回<b style="font-size:50px;">2973</b>名儿童
                     <br>
                     <a style="color: #ffffff" href="http://www.anman.org/nebulas">基于星云链</a>:
                     <a style="color: #ffffff" href="http://www.anman.org/nebulas/commit">统计指标上链</a>
@@ -382,83 +382,41 @@
             });
         });
     };
-    Date.prototype.Format = function (fmt) { //author: meizz 
+    Date.prototype.Format = function (fmt) { //author: meizz
         var o = {
-            "M+": this.getMonth() + 1, //月份 
-            "d+": this.getDate(), //日 
-            "H+": this.getHours(), //小时 
-            "m+": this.getMinutes(), //分 
-            "s+": this.getSeconds(), //秒 
-            "q+": Math.floor((this.getMonth() + 3) / 3), //季度 
-            "S": this.getMilliseconds() //毫秒 
+            "M+": this.getMonth() + 1, //月份
+            "d+": this.getDate(), //日
+            "H+": this.getHours(), //小时
+            "m+": this.getMinutes(), //分
+            "s+": this.getSeconds(), //秒
+            "q+": Math.floor((this.getMonth() + 3) / 3), //季度
+            "S": this.getMilliseconds() //毫秒
         };
         if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
         for (var k in o)
             if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
         return fmt;
     };
-    var serialNumber;
-    var intervalQuery;
-    var count=0;
     var committ = function () {
-        $(".modal.loading").modal("show");
+        // $(".modal.loading").modal("show");
         let result = [];
         let timestamp = new Date().getTime();
-        let total = '2968';
+        let total = '2973';
         $.get('http://www.anman.org/nebulas/check_total', function (res) {
             total = res.total;
             console.log(total);
         });
-        var args = "[" + timestamp + "," + total + "]";
+        var args = "[\"" + timestamp + "\",\"" + total + "\"]";
         result.push(timestamp);
         result.push(total);
         let callArgs = JSON.stringify(result);
         let callFunction = "set";
-        serialNumber = nebPay.call(ContractAddress, Amount, callFunction, callArgs, {    //使用nebpay的call接口去调用合约,
-
-            listener: cbPush        //设置listener, 处理交易返回信息
+        nebPay.call(ContractAddress, Amount, callFunction, callArgs, {
+            listener: cbPush
         });
-        intervalQuery=setInterval(function () {
-            funcIntervalQuery();
-        }, 5000);
     };
     var cbPush = function (resp) {
         console.log("response of push: " + JSON.stringify(resp))
-    };
-    var funcIntervalQuery = function () {
-        count+=1;
-        nebPay.queryPayInfo(serialNumber)   //search transaction result from server (result upload to server by app)
-            .then(function (resp) {
-                console.log("tx result: " + resp)   //resp is a JSON string
-                var respObject = JSON.parse(resp)
-                if (respObject.code === 0) {
-                    $(".modal.loading").modal("hide");
-                    clearInterval(intervalQuery)
-                }else{
-                    if (count==7){
-                        bootbox.dialog({
-                            backdrop: true,
-                            message: respObject.msg,
-                            onEscape: true,
-                            size: "large",
-                            title: "Error"
-                        });
-                        clearInterval(intervalQuery)
-                        $(".modal.loading").modal("hide");
-                    }
-
-                }
-
-            })
-            .catch(function (err) {
-                bootbox.dialog({
-                    backdrop: true,
-                    message: err.message,
-                    onEscape: true,
-                    size: "large",
-                    title: "Error"
-                });
-            });
     };
 
 </script>
